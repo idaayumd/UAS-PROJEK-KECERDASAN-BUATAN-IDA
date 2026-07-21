@@ -1,5 +1,6 @@
-numpy==2.5.1
-pandas==3.0.3
+numpy
+pandas
 streamlit
 scikit-learn
-pip==26.1.2
+matplotlib
+streamlit-option-menu
