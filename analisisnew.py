@@ -160,7 +160,7 @@ if uploaded_file is not None:
     cluster_means = df_processed_original_features.groupby('Cluster').mean()
     st.dataframe(cluster_means)
 
-  st.subheader("Interpretasi Cluster")
+    st.subheader("Interpretasi Cluster")
     for i in range(optimal_k):
         st.write(f"#### Cluster {i}:")
         # Select top 3 features with highest absolute mean values in this cluster
