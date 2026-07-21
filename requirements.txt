@@ -3,4 +3,3 @@ pandas
 streamlit
 scikit-learn
 matplotlib
-streamlit-option-menu
