@@ -96,8 +96,31 @@ def plot_pca_clusters(df_scaled, clusters, RGB_PALETTE):
 # --- Streamlit App Layout --- #
 st.set_page_config(layout="wide", page_title="Defect Clustering Analysis")
 
-st.title("Analisis Clustering Cacat Produk Ida Ayu MD 01944")
+st.title("Analisis Clustering Cacat Produk")
+st.markdown("### Oleh: Ida Ayu M.D")
 st.write("Aplikasi ini melakukan analisis clustering pada dataset cacat produk, dengan preprocessing, K-Means, dan interpretasi fitur.")
+
+import streamlit as st
+# CSS background dengan pattern bunga
+st.markdown(
+    """
+    <style>
+        .stApp {
+            background: linear-gradient(to bottom right, #ffe6eb, #ffffff), url("D:\KuliahnewD\projekAI\lily.png");
+            background-size: 150px;   /* ukuran motif bunga */
+            background-repeat: repeat; /* jadi pattern */
+            background-attachment: fixed;
+            background-position: center; /* titik awal pengulangan */
+        }
+        h1, h3, p, label {
+            position: relative;
+            z-index: 10;
+            text-shadow: 1px 1px 2px #ffffff; /* biar teks tetap jelas */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # --- File Upload --- #
 st.header("1. Unggah Dataset Anda")
@@ -137,7 +160,7 @@ if uploaded_file is not None:
     cluster_means = df_processed_original_features.groupby('Cluster').mean()
     st.dataframe(cluster_means)
 
-    st.markdown("--- ### Interpretasi Cluster")
+  st.subheader("Interpretasi Cluster")
     for i in range(optimal_k):
         st.write(f"#### Cluster {i}:")
         # Select top 3 features with highest absolute mean values in this cluster
@@ -150,5 +173,15 @@ if uploaded_file is not None:
         if bottom_features:
             st.write(f"  - Karakteristik utama (nilai rendah): {', '.join(bottom_features)}")
 
+        st.markdown("---")  # garis pemisah visual
+        # Tambahkan interpretasi bisnis otomatis per cluster
+        if i == 0:
+           st.markdown("→ Produk dengan cacat ringan, biaya perbaikan relatif rendah. Cocok diperbaiki di tahap inspeksi akhir.")
+        elif i == 1:
+           st.markdown("→ Produk dengan cacat sedang, biaya perbaikan menengah. Perlu evaluasi proses produksi agar cacat tidak berulang.")
+        elif i == 2:
+           st.markdown("→ Produk dengan cacat berat, biaya perbaikan tinggi. Indikasi masalah serius di lini produksi.")
+        else:
+           st.markdown("→ Cluster tambahan: analisis sesuai karakteristik fitur dominan.")
 else:
     st.info("Silakan unggah file CSV untuk memulai analisis.")
